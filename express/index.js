@@ -1,17 +1,22 @@
 const express = require("express");
-
 const app = express();
+const path = require("path");
+
+const pathdir = path.join(__dirname, "public");
+
+app.use(express.static(pathdir));
 
 app.get("/", (req, res) => {
-    res.send("hi this is first express js route");
+    res.sendFile(`${pathdir}/inde.html`);
 })
 
 app.get("/about", (req, res) => {
-    res.send("hi this is about page");
+    res.sendFile(`${pathdir}/home.html`);
 })
 
 app.get("/download", (req, res) => {
-    res.send("download file");
+    res.download(`${pathdir}/inde.html`);
+        
 })
 
 app.listen(3000, () => {
