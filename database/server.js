@@ -25,7 +25,7 @@ app.post("/", async (req, res) => {
 //2. get --> get the data from database
 app.get("/user", async(req, res) => {
     try {
-        const getdata = await user.find({name: "code sikhoo mje sei"});
+        const getdata = await user.find({});
         res.send(getdata);
     } catch (error) {
         res.status(404).send(error);
@@ -39,6 +39,17 @@ app.get("/user/:id", async(req, res) => {
         const id = req.params.id; 
         const getiddata = await user.findById({_id: id})
         res.send(getiddata);
+    } catch (error) {
+        res.status(404).send(error);
+    }
+})
+
+// login function
+app.post("/login", async(req, res) => {
+    try {
+        const useremail = req.body.email;
+        const getemail = await user.findOne({email: useremail});
+        res.send(getemail);
     } catch (error) {
         res.status(404).send(error);
     }
